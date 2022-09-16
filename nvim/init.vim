@@ -30,6 +30,10 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
+" Insert or delete brackets, parens, quotes in pair.
+" 成对插入或删除括号、括号、引号
+Plug 'jiangmiao/auto-pairs'
+
 " 结束插件导入 
 call plug#end() 
 
