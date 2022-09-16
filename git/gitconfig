@@ -1,0 +1,9 @@
+[user]
+	name = xuchi021105
+	email = 1356507188@qq.com
+[core]
+	# default text editor when commit or fix merge conflict
+	editor = vim
+
+	# use neovim to edit
+	# editor = /usr/bin/nvim
