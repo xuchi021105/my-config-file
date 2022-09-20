@@ -122,13 +122,11 @@ function! s:on_lsp_buffer_enabled() abort
 	" 从函数定义处，找到调用处，并提供跳转选项 
 	nmap <buffer> gr <plug>(lsp-references)
 	" 查看函数的注释，文档，用法(实现hover效果,即jetbrain家中的悬停效果）
-	nmap <buffer> H <plug>(lsp-hover)
+	" vim原生K就是用man命令打开光标所在单词的手册页
+	nmap <buffer> K <plug>(lsp-hover)
 
 	nmap <buffer> gs <plug>(lsp-document-symbol-search)
 	nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
-
-	nmap <buffer> gi <plug>(lsp-implementation)
-	nmap <buffer> gt <plug>(lsp-type-definition)
 
     let g:lsp_format_sync_timeout = 1000
     autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
