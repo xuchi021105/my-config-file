@@ -206,3 +206,18 @@ set ignorecase
 " 如果用户输入字符串为全小写,那么忽略大小写搜索
 " 如果用户输入的字符串中有大写字母,那么不忽视大小写进行搜索
 set smartcase
+
+" 用于文本折叠的部分(fold)
+" zf(fold) zo(open) zc(close) zm(more) zr(reduce)
+
+" 这个命令将在窗口左边显示一小栏来标识各个折叠。一个 + 表示某个关闭的折叠。一个 - 表示每个打开的折叠的开头，而 | 则表示该折叠内其余的行。
+set foldcolumn=4
+
+" 将游标移动到折叠时，折叠将被自动打开
+set foldopen=all
+
+" 将游标移出折叠范围时，将自动折叠
+set foldclose=all
+
+" 设置以缩进为标志,进行折叠，这样会导致不能使用zf进行手动折叠了
+set foldmethod=indent
