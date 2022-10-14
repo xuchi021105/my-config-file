@@ -36,10 +36,10 @@ Plug 'jiangmiao/auto-pairs'
 
 " git相关的插件
 
-"
+" 用于管理显示git项目,类似git diff的功能,可以在左边栏中显示改动情况
 Plug 'airblade/vim-gitgutter'
 
-"
+" 用于显示git项目中所有改动的提交者和提交时间(用于blame)
 Plug 'APZelos/blamer.nvim'
 
 " 结束插件导入 
