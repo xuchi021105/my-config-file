@@ -34,6 +34,14 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " 成对插入或删除括号、括号、引号
 Plug 'jiangmiao/auto-pairs'
 
+" git相关的插件
+
+"
+Plug 'airblade/vim-gitgutter'
+
+"
+Plug 'APZelos/blamer.nvim'
+
 " 结束插件导入 
 call plug#end() 
 
@@ -211,6 +219,7 @@ set smartcase
 " zf(fold) zo(open) zc(close) zm(more) zr(reduce)
 
 " 这个命令将在窗口左边显示一小栏来标识各个折叠。一个 + 表示某个关闭的折叠。一个 - 表示每个打开的折叠的开头，而 | 则表示该折叠内其余的行。
+" 用于在左边栏表示折叠
 set foldcolumn=4
 
 " 将游标移动到折叠时，折叠将被自动打开
@@ -221,3 +230,25 @@ set foldclose=all
 
 " 设置以缩进为标志,进行折叠，这样会导致不能使用zf进行手动折叠了
 set foldmethod=indent
+
+" 设置vim写入swap file的间隔时间
+" 也是git-gutter显示diff的更新时间,默认值为4000ms,现设置为100ms
+set updatetime=1000
+
+" 若改动过多,git_gutter将限制标记的数量,默认值为500,防止拖慢ui,现将最大值限制解除,即设为-1
+let g:gitgutter_max_signs = -1
+
+" 设置左边栏git-gutter显示git改动的背景颜色
+highlight SignColumn guibg=blue ctermbg=blue
+
+" 设置blamer.nvim在vim启动时开启,如果是一个git repo将自动关闭
+let g:blamer_enabled = 1
+
+" 日期的格式(绝对时间)
+" let g:blamer_date_format = '%y.%m.%d %H:%M'
+
+" 以相对时间显示commit日期
+let g:blamer_relative_time = 1
+
+" 设置blame message的颜色
+highlight Blamer guifg=lightgrey
