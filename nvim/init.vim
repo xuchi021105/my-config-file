@@ -165,6 +165,12 @@ map <leader><leader>n <plug>(easymotion-next)
 " 向前寻找
 map <leader><leader>N <plug>(easymotion-prev)
 
+" vim-lsp的映射
+
+" 映射用于重新格式化代码
+" format code
+map <leader>fc :LspDocumentFormat<cr>
+
 " 在插入模式下使用非递归映射映射jk为退出键
 " jk -> <esc>
 inoremap jk <esc>
@@ -229,7 +235,9 @@ set foldopen=all
 set foldclose=all
 
 " 设置以缩进为标志,进行折叠，这样会导致不能使用zf进行手动折叠了
-set foldmethod=indent
+" 取消以缩进为标志折叠,因为这样看的不舒服,还是用zf进行手动折叠吧
+" 或者自动设置折叠模式
+"set foldmethod=indent
 
 " 设置vim写入swap file的间隔时间
 " 也是git-gutter显示diff的更新时间,默认值为4000ms,现设置为100ms
