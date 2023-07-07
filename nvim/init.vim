@@ -42,12 +42,31 @@ Plug 'airblade/vim-gitgutter'
 " 用于显示git项目中所有改动的提交者和提交时间(用于blame)
 Plug 'APZelos/blamer.nvim'
 
+" 用于函数的查找,有的功能要结合ctags使用
+Plug 'liuchengxu/vista.vim'
+
+" 用于查找(leader function)
+" :Leaderf <subcommand> 执行子命令
+Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
+
+" 彩虹括号,用于区分括号
+Plug 'luochen1990/rainbow'
+
+"  plenary是telescope的依赖
+Plug 'nvim-lua/plenary.nvim'
+" telescope用于模糊查找(fuzzy finder)
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+" or                                , { 'branch': '0.1.x' }
+
 " 结束插件导入 
 call plug#end() 
 
 " mapleader变量代表<leader>的值,设置<leader>值为空格键
 " <leader> -> ' '
 let mapleader = ' '
+
+" 激活彩虹括号
+let g:rainbow_active = 1 " set to 0 if you want to enable it later via :RainbowToggle
 
 " 执行lua语句，直到输入EOF（End Of File)结束,类似python3 << EOF; EOF 用其来执行需要lua语言进行配置的插件 
 lua << EOF
@@ -99,7 +118,6 @@ require("nvim-tree").setup({
     dotfiles = false,
   },
 })
-
 -- lua语句结束的标志
 EOF
 
@@ -183,6 +201,12 @@ inoremap <c-d> <del>
 " <c-n>s -> :nohlsearch<cr>
 nnoremap <c-n>s :nohlsearch<CR>
 
+" telescope用于寻找文件的映射
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
 " 设置语法高亮提示，按照文件的后缀名(*.py,*.cpp)带来不同的语法提示，如果关闭将没有任何提示
 syntax on 
 
@@ -260,3 +284,20 @@ let g:blamer_relative_time = 1
 
 " 设置blame message的颜色
 highlight Blamer guifg=lightgrey
+
+" 用于neovide的配置应用
+if exists("g:neovide")
+	
+    " Put anything you want to happen only in Neovide here
+    
+    " 用于neovide透明度的设置
+    let g:neovide_transparency = 0.5
+    
+    " 启用性能分析器,在左上角显示时间图
+    " let g:neovide_profiler = v:true
+    
+    " 设置特效为鱼雷
+    let g:neovide_cursor_vfx_mode = "torpedo"
+    
+    
+endif
