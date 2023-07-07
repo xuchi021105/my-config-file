@@ -58,6 +58,13 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 " or                                , { 'branch': '0.1.x' }
 
+" vim的dashboard(主页) 之后要进行自己定制
+Plug 'goolord/alpha-nvim'
+
+" vim的状态栏 之后要进行自己定制
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 " 结束插件导入 
 call plug#end() 
 
@@ -70,6 +77,8 @@ let g:rainbow_active = 1 " set to 0 if you want to enable it later via :RainbowT
 
 " 执行lua语句，直到输入EOF（End Of File)结束,类似python3 << EOF; EOF 用其来执行需要lua语言进行配置的插件 
 lua << EOF
+
+require'alpha'.setup(require'alpha.themes.dashboard'.config)
 
 -- nvim_tree插件配置
 
