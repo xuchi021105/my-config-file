@@ -216,6 +216,30 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
+
+" For Emacs-style editing on the command-line: 
+" 这里是从vim的help文档中找到的在命令行中使用emacs风格的快捷键(用:help
+" emacs就能找到)
+"
+" start of line
+:cnoremap <C-A>		<Home>
+" back one character
+:cnoremap <C-B>		<Left>
+" delete character under cursor
+:cnoremap <C-D>		<Del>
+" end of line
+:cnoremap <C-E>		<End>
+" forward one character
+:cnoremap <C-F>		<Right>
+" recall newer command-line
+:cnoremap <C-N>		<Down>
+" recall previous (older) command-line
+:cnoremap <C-P>		<Up>
+" back one word
+:cnoremap <Esc><C-B>	<S-Left>
+" forward one word
+:cnoremap <Esc><C-F>	<S-Right>
+
 " 设置语法高亮提示，按照文件的后缀名(*.py,*.cpp)带来不同的语法提示，如果关闭将没有任何提示
 syntax on 
 
