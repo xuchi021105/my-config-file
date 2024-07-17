@@ -1,0 +1,218 @@
+# 其中目前知道的有几个层级, display 显示器 space 虚拟桌面 window 窗口, 针对的都是这些对象
+# restart yabai
+ctrl + alt + cmd - r : yabai --restart-service
+
+# system control
+cmd + shift - s : osascript -e 'tell application "System Events" to sleep'
+
+# 这个return是回车键的意思, 相当于直接打开东西了, 不用spotlight这种
+# 就是一种特意的针对吧
+cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
+cmd + alt - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~ joshuto
+cmd + shift - return : open -na /Applications/Google\ Chrome.app
+
+alt - q : yabai -m window --focus close # 用yabai的快捷键关闭window
+
+# 我这里把mod键都改成ctrl + cmd(实质上的alt), 我实在是不喜欢用win(这里的alt,mac下的option)这个键, 不过有些很少用的可以用win键吧
+#
+# 这里思考之后又考虑用win(option, 这里叫alt键, 和cmd区分的键), 我把这个认为是super键,
+# 其中不再用ctrl + cmd是有原因的, 因为这个对应的层功能太多了, 多到需要用一个单独的键来做映射
+# 而且是我发现可以大拇指按左边的win键, 以及可以把右边的cmd键也映射为win, 这样就方便多了,
+# 现在想的是这
+# 根据index切换space
+alt - 1 : yabai -m space --focus 1
+alt - 2 : yabai -m space --focus 2
+alt - 3 : yabai -m space --focus 3
+alt - 4 : yabai -m space --focus 4
+alt - 5 : yabai -m space --focus 5
+alt - 6 : yabai -m space --focus 6
+alt - 7 : yabai -m space --focus 7
+alt - 8 : yabai -m space --focus 8
+alt - 9 : yabai -m space --focus 9
+
+# -- Changing Window Focus --
+
+# 我这里把mod键都改成ctrl + cmd(实质上的alt), 我实在是不喜欢用win(这里的alt,mac下的option)这个键, 不过有些很少用的可以用win键吧
+# 在space内切换window, 用这个应该也可以获得focus
+# change window focus within space
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - h : yabai -m window --focus west
+alt - l : yabai -m window --focus east
+alt - o : yabai -m window --focus next
+
+# 这几个是用来聚焦的, 其中这个快捷键我还没有改
+# ctrl + cmd - l : yabai -m window --focus recent
+# ctrl + cmd - l : yabai -m window --focus prev
+# ctrl + cmd - l : yabai -m window --focus next
+
+# change focus between external displays (left and right)
+# 这里是用来改变显示器中的焦点的, 用在多显示器的情况下
+# display是显示器的意思
+# ctrl + alt - s: yabai -m display --focus west
+# ctrl + alt - g: yabai -m display --focus east
+# 就s, g吧, 先用着, 不舒服了再换
+alt - s: yabai -m display --focus west
+alt - g: yabai -m display --focus east
+
+# -- Modifying the Layout --
+
+# 这边都用大写的视角
+# rotate layout clockwise
+shift + alt - r : yabai -m space --rotate 270
+
+# flip along y-axis
+shift + alt - y : yabai -m space --mirror y-axis
+
+# flip along x-axis
+shift + alt - x : yabai -m space --mirror x-axis
+
+# toggle window float
+shift + alt - f : yabai -m window --toggle float; sketchybar --trigger window_focus
+shift + alt - t : yabai -m window --toggle sticky
+
+# 这个是用来切换recent(最近)的space, 其中这个只能切换到最近使用的空间, 不能像cmd(super)+tab这种
+# 虽然单击也是最近但是可以选择要使用的应用程序, 这个是因为, 所以这个还是多了一个选择空间的
+# 所以说结合着用, 但是这个是维护一个栈的结构, 很容易记混, 所以yabai相当于提供了一个数组的结构
+# 定值所以记住就行了
+alt - tab : yabai -m space --focus recent
+
+
+# -- Modifying Window Size --
+
+# maximize a window
+alt - z : yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
+
+# balance out tree of windows (resize to occupy same area)
+shift + alt - e : yabai -m space --balance
+
+# -- Moving Windows Around --
+
+# swap 和 warp 命令都可以用来交换窗口位置，但 warp 命令可能会更改窗口的大小和分割比例。
+# 具体的行为会受到 yabai 配置的影响，所以实际效果可能会有所不同。
+# 如果你希望窗口在交换位置时保持原有大小，应该使用 swap；
+# 如果你希望在交换位置的同时也调整窗口大小，可以使用 warp。
+#
+# swap windows
+# ctrl + alt - j : yabai -m window --swap south
+# ctrl + alt - k : yabai -m window --swap north
+# ctrl + alt - h : yabai -m window --swap west
+# ctrl + alt - l : yabai -m window --swap east
+
+# move window and split
+# 这里是考虑用大写的方法来做, 就是alt + (shift letter)
+shift + alt - j : yabai -m window --warp south
+shift + alt - k : yabai -m window --warp north
+shift + alt - h : yabai -m window --warp west
+shift + alt - l : yabai -m window --warp east
+
+# move window to display left and right
+shift + alt - s : yabai -m window --display west; yabai -m display --focus west;
+shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
+
+
+# move window to prev and next space
+# shift + alt - p : yabai -m window --space prev;
+# shift + alt - n : yabai -m window --space next;
+
+# 这个才是切换space的, 上面这个是移动window, 到左右space中
+# 切换到左边的 space
+alt - p: yabai -m space --focus prev; sketchybar --trigger window_focus
+# 切换到右边的 space
+alt - n: yabai -m space --focus next; sketchybar --trigger window_focus
+
+# 创建space和销毁space在当前这个display(显示器)中
+# Create space on the active display
+alt - c : yabai -m space --create; sketchybar --trigger window_focus
+# Delete focused space and focus first space on display
+alt - x : yabai -m space --destroy; sketchybar --trigger window_focus
+
+# move window to space 
+# 其中我觉得是shift更常用一些, 所以这个转换一下
+# 将当前的窗口移动到编号的空间, 但是本身不会切换过去, 
+ctrl + alt - 1 : yabai -m window --space 1 && sketchybar --trigger windows_on_spaces
+ctrl + alt - 2 : yabai -m window --space 2 && sketchybar --trigger windows_on_spaces
+ctrl + alt - 3 : yabai -m window --space 3 && sketchybar --trigger windows_on_spaces
+ctrl + alt - 4 : yabai -m window --space 4 && sketchybar --trigger windows_on_spaces
+ctrl + alt - 5 : yabai -m window --space 5 && sketchybar --trigger windows_on_spaces
+ctrl + alt - 6 : yabai -m window --space 6 && sketchybar --trigger windows_on_spaces
+ctrl + alt - 7 : yabai -m window --space 7 && sketchybar --trigger windows_on_spaces
+ctrl + alt - 8 : yabai -m window --space 8 && sketchybar --trigger windows_on_spaces
+ctrl + alt - 9 : yabai -m window --space 9 && sketchybar --trigger windows_on_spaces
+
+# 将当前的窗口移动到编号的空间, 并且会切换focus焦点本身不会切换过去, 
+shift + alt - 1 : yabai -m window --space 1; yabai -m space --focus 1; sketchybar --trigger windows_on_spaces
+shift + alt - 2 : yabai -m window --space 2; yabai -m space --focus 2; sketchybar --trigger windows_on_spaces
+shift + alt - 3 : yabai -m window --space 3; yabai -m space --focus 3; sketchybar --trigger windows_on_spaces
+shift + alt - 4 : yabai -m window --space 4; yabai -m space --focus 4; sketchybar --trigger windows_on_spaces
+shift + alt - 5 : yabai -m window --space 5; yabai -m space --focus 5; sketchybar --trigger windows_on_spaces
+shift + alt - 6 : yabai -m window --space 6; yabai -m space --focus 6; sketchybar --trigger windows_on_spaces
+shift + alt - 7 : yabai -m window --space 7; yabai -m space --focus 7; sketchybar --trigger windows_on_spaces
+shift + alt - 8 : yabai -m window --space 8; yabai -m space --focus 8; sketchybar --trigger windows_on_spaces
+shift + alt - 9 : yabai -m window --space 9; yabai -m space --focus 9; sketchybar --trigger windows_on_spaces
+
+# stop/start/restart yabai
+ctrl + alt - q : brew services stop yabai
+ctrl + alt - s : brew services start yabai
+ctrl + alt - r : brew services restart yabai
+
+# sketchybar
+# lalt - space : yabai -m window --toggle float; sketchybar --trigger window_focus
+# shift + lalt - f : yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
+# lalt - f : yabai -m window --toggle zoom-parent; sketchybar --trigger window_focus
+# shift + lalt - 1 : yabai -m window --space 1 && sketchybar --trigger windows_on_spaces
+
+# 这个是gpt的解释或者说有点翻译稿的意思
+# 这个配置文件看起来像是一个为macOS窗口管理器 yabai 和 sketchybar（一个macOS状态栏UI）编写的快捷键绑定集合，通常是放在 skhd（一个简单热键守护进程）的配置文件中。下面是对每一段快捷键的作用的解释：
+
+# 重启 yabai 服务 有用但我不会用
+# ctrl + alt + cmd - r: 重启 yabai 服务。
+#
+# 系统控制 有用但我不会用
+# cmd + shift - s: 使系统进入睡眠状态。
+# cmd - return: 打开或切换到名为 kitty 的终端应用程序的一个实例。
+# cmd + alt - return: 打开 kitty 并执行名为 joshuto 的命令。
+# cmd + shift - return: 打开一个新的 Google Chrome 窗口。
+#
+# 切换工作空间（Space）有用
+# alt - 数字: 切换到对应编号的工作空间。
+#
+# 改变窗口焦点 有用
+# alt - j/k/h/l: 在当前工作空间内，将焦点移动到相对于当前窗口的南/北/西/东方向上的窗口。
+# alt - s/g: 将焦点移动到左/右边的外部显示器。
+#
+# 修改布局 有用但我用不到
+# shift + alt - r: 顺时针旋转当前工作空间的布局。
+# shift + alt - y/x: 在 y 轴/x 轴上翻转当前工作空间。
+#
+# 切换窗口浮动 有用, 可以在需要堆叠式的时候切换然后再切回来
+# shift + alt - f: 切换当前窗口的浮动状态，并触发 sketchybar 的 window_focus 事件。
+# shift + alt - t: 切换当前窗口的粘性状态（粘性窗口在所有工作空间中可见）。
+#
+# 调整窗口大小 有用, 类似tmux中的zoom功能, 然后恢复, 要解除全屏也是一样的按键
+# shift + alt - m: 切换窗口的全屏状态，并触发 sketchybar 的 window_focus 事件。
+# shift + alt - e: 平衡所有窗口的大小，使它们占据相同的面积。
+#
+# 移动窗口 有用
+# shift + alt - j/k/h/l: 与南/北/西/东方向上的窗口交换位置。
+# ctrl + alt - j/k/h/l: 将窗口移到南/北/西/东方向上，并分割窗口。
+# shift + alt - s/g: 将窗口移动到左/右显示器并聚焦那个显示器。
+#
+# 这个有两种, 一种是移动window到其他到space, 另一个是移动当前到space
+# shift + alt - p 切换到前一个space, 和ctrl - left-arrow一样
+# shift + alt - n 切换到前一个space, 和ctrl - right-arrow一样
+#
+# 管理工作空间 有用
+# shift + alt - n: 创建一个新的工作空间。
+# shift + alt - d: 删除当前聚焦的工作空间。
+#
+# 移动窗口到特定工作空间 有用
+# shift + alt - 数字: 将当前窗口移动到指定编号的工作空间。
+# ctrl + alt - 数字: 将当前窗口移动到指定编号的工作空间并聚焦那个工作空间。
+#
+# 控制 yabai 服务 有用但我会用命令行实现
+# ctrl + alt - q/s/r: 停止/开始/重启 yabai 服务。
+#
+# sketchybar 相关
+# 最后一部分注释掉的代码似乎是为 sketchybar 设置的一些快捷键，但它们已被注释掉，所以不会被执行。
+# 这个配置文件允许用户通过键盘快捷键快速管理 macOS 上的窗口和工作空间，从而提高工作效率。
